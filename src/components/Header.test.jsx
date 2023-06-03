@@ -2,14 +2,14 @@ import { render, screen } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router-dom';
 
-import App from './App';
+import Header from './Header';
 
-test('App', () => {
+test('Header', () => {
   render((
     <MemoryRouter>
-      <App />
+      <Header />
     </MemoryRouter>
   ));
 
-  screen.getByText(/마카오 선물하기/);
+  screen.getByText(/홈/);
 });
