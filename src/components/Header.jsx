@@ -1,6 +1,16 @@
 import { Link } from 'react-router-dom';
 
+import { useEffect } from 'react';
+import Account from './Account';
+import useMallStore from '../hooks/useMallStore';
+
 export default function Header() {
+  const mallStore = useMallStore();
+
+  useEffect(() => {
+    mallStore.fetchAccount();
+  }, []);
+
   return (
     <header>
       <nav>
@@ -16,6 +26,9 @@ export default function Header() {
           </li>
           <li>
             <Link to="/signup">회원가입</Link>
+          </li>
+          <li>
+            <Account />
           </li>
           <li>
             <Link to="/login">로그인</Link>
