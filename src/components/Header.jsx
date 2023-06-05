@@ -16,6 +16,9 @@ export default function Header() {
       <nav>
         <ul>
           <li>
+            선물하기
+          </li>
+          <li>
             <Link to="/">홈</Link>
           </li>
           <li>
