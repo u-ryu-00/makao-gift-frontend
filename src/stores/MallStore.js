@@ -6,6 +6,8 @@ export default class MallStore {
 
     this.userId = '';
     this.amount = 0;
+
+    this.products = [];
   }
 
   subscribe(listener) {
@@ -40,6 +42,14 @@ export default class MallStore {
     this.userId = userId;
     this.amount = amount;
 
+    this.publish();
+  }
+
+  async fetchProducts() {
+    this.products = [];
+    this.publish();
+
+    this.products = await apiService.fetchProducts();
     this.publish();
   }
 }
