@@ -23,4 +23,6 @@ Scenario('상품이 없는 경우', ({ I }) => {
 
   // Then
   I.see('상품이 존재하지 않습니다');
+
+  I.setupDatabase();
 });

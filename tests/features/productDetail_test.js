@@ -2,7 +2,7 @@ Feature('상품 세부 정보 확인 - 고객은 상품을 구매하기 위해 �
 
 Scenario('상세 페이지를 방문한 경우 ', ({ I }) => {
   // When
-  I.amOnPage('/products/{id}');
+  I.amOnPage('/products/1');
 
   // Then
   I.see('제조사');
@@ -13,7 +13,7 @@ Feature('상품 선택 - 고객은 원하는 상품과 개수를 선택하고 �
 
 Scenario('로그인 전 선물하기를 진행할 경우', ({ I }) => {
   // Given
-  I.amOnPage('/products/{id}');
+  I.amOnPage('/products/1');
 
   // When
   I.click('선물하기');
@@ -28,7 +28,7 @@ Scenario('로그인 후 잔액이 모자란 채 선물하기를 진행할 경우
   // 고객 잔액 정보 세팅
   // 상품 금액 세팅
   // 로그인 함.
-  I.amOnPage('/products/{id}');
+  I.amOnPage('/products/1');
 
   // When
   I.click('선물하기');
@@ -42,7 +42,7 @@ Scenario('로그인 후 잔액이 충분할 때 선물하기를 진행할 경우
   // 고객 잔액 정보 세팅
   // 상품 금액 세팅
   // 로그인 함.
-  I.amOnPage('/products/{id}');
+  I.amOnPage('/products/1');
 
   // When
   I.click('선물하기');

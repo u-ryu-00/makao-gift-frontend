@@ -1,5 +1,17 @@
+import { useEffect } from 'react';
+import Product from '../components/Product';
+import useMallStore from '../hooks/useMallStore';
+
 export default function ProductDetailPage() {
+  const mallStore = useMallStore();
+
+  const productId = window.location.pathname.split('/').pop();
+
+  useEffect(() => {
+    mallStore.fetchProduct(productId);
+  }, []);
+
   return (
-    <img src="https://velog.velcdn.com/images/heelieben/post/63766f3f-ffd7-445e-a7bc-41ba722c7cf0/image.png" alt="개발진스" />
+    <Product />
   );
 }
