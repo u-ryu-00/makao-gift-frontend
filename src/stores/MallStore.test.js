@@ -35,4 +35,13 @@ describe('MallStore', () => {
       expect(mallStore.amount).toBe(50_000);
     });
   });
+
+  describe('fetchProduct', () => {
+    it('loads product information', async () => {
+      await mallStore.fetchProduct(1);
+
+      expect(mallStore.title).toBe('[단독각인] 캔디 글레이즈 컬러밤');
+      expect(mallStore.company).toBe('입생로랑');
+    });
+  });
 });

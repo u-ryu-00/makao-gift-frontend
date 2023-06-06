@@ -1,5 +1,7 @@
 import useMallStore from '../hooks/useMallStore';
 
+import numberFormat from '../utils/numberFormat';
+
 export default function Products() {
   const mallStore = useMallStore();
 
@@ -12,12 +14,17 @@ export default function Products() {
       )
         : null}
       {products.map((product) => (
-        <button type="button" key={product.id}>
+        <a href={`/products/${product.id}`} key={product.id}>
+          <img src={product.imageUrl} alt="상품 사진" style={{ width: '100px' }} />
           <h1>{product.company}</h1>
           <h1>{product.title}</h1>
-          <h1>{product.price}</h1>
-        </button>
+          <h1>
+            {numberFormat(product.price)}
+            원
+          </h1>
+        </a>
       ))}
     </div>
+
   );
 }

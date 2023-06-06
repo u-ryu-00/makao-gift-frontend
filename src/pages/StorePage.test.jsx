@@ -2,13 +2,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 
 import { mallStore } from '../stores/MallStore';
 
-import Products from './Products';
+import StorePage from './StorePage';
 
 test('products', async () => {
   mallStore.fetchProducts();
 
   render((
-    <Products />
+    <StorePage />
   ));
 
   screen.getByText(/상품이 존재하지 않습니다/);
