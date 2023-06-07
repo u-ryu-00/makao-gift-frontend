@@ -14,6 +14,9 @@ export default class MallStore {
     this.price = 0;
     this.description = '';
     this.imageUrl = '';
+
+    this.quantity = 1;
+    this.totalPrice = 0;
   }
 
   subscribe(listener) {
@@ -66,6 +69,28 @@ export default class MallStore {
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
+    this.quantity = 1; // 수량 초기화
+
+    this.calculateTotalPrice(); // 총 상품금액 계산
+
+    this.publish();
+  }
+
+  calculateTotalPrice() {
+    this.totalPrice = this.price * this.quantity;
+    this.publish();
+  }
+
+  plusQuantityAndTotalPrice() {
+    this.quantity += 1;
+    this.totalPrice += this.price;
+
+    this.publish();
+  }
+
+  minusQuantityAndTotalPrice() {
+    this.quantity -= 1;
+    this.totalPrice -= this.price;
 
     this.publish();
   }
