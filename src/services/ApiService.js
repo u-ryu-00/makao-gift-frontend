@@ -45,6 +45,52 @@ export default class ApiService {
       imageUrl: data.imageUrl,
     };
   }
+
+  async fetchOrders() {
+    const url = `${baseUrl}/orders`;
+    const { data } = await axios.get(url);
+
+    const { orders } = data;
+    return orders;
+  }
+
+  async createOrder({
+    userId, productId, title, company, description, imageUrl, quantity, receiver, address, message,
+  }) {
+    const url = `${baseUrl}/orders`;
+    await axios.post(url, {
+      userId,
+      productId,
+      title,
+      company,
+      description,
+      imageUrl,
+      quantity,
+      receiver,
+      address,
+      message,
+    });
+  }
+
+  async fetchOrder(id) {
+    const url = `${baseUrl}/orders/${id}`;
+    const { data } = await axios.get(url);
+
+    return {
+      orderId: data.orderId,
+      productId: data.productId,
+      title: data.title,
+      company: data.company,
+      description: data.description,
+      imageUrl: data.imageUrl,
+      quantity: data.quantity,
+      totalPrice: data.totalPrice,
+      receiver: data.receiver,
+      address: data.address,
+      message: data.message,
+      createdAt: data.createdAt,
+    };
+  }
 }
 
 export const apiService = new ApiService();

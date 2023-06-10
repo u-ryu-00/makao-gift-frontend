@@ -26,9 +26,9 @@ export default function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/products" element={<StorePage />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
-        <Route path="/order/:productId" element={<OrderPage />} />
+        <Route path="/order" element={<OrderPage />} />
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/orders/{id}" element={<OrderDetailPage />} />
+        <Route path="/orders/:id" element={<OrderDetailPage />} />
       </Routes>
     </div>
   );

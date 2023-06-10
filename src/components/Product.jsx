@@ -1,15 +1,16 @@
 import { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import useMallStore from '../hooks/useMallStore';
 
 import numberFormat from '../utils/numberFormat';
 
 export default function Product() {
+  const navigate = useNavigate();
+
   const mallStore = useMallStore();
 
-  const [isPresentButtonClicked, setIsPresentButtonClicked] = useState(false);
-
-  const productId = window.location.pathname.split('/').pop();
+  const [isError, setError] = useState(false);
 
   const minusButtonClick = () => {
     mallStore.minusQuantityAndTotalPrice();
@@ -20,14 +21,16 @@ export default function Product() {
   };
 
   const presentButtonClick = () => {
-    setIsPresentButtonClicked(true);
-    if (mallStore.amount >= mallStore.totalPrice) {
-      window.location.href = `/order/${productId}`;
+    if (mallStore.amount < mallStore.totalPrice) {
+      setError(true);
+      return;
     }
+    navigate('/order');
   };
 
   return (
     <div>
+      <img src={mallStore.imageUrl} alt="상품 사진" style={{ width: '100px' }} />
       <h1>{mallStore.title}</h1>
       <h1>
         {numberFormat(mallStore.price)}
@@ -71,7 +74,7 @@ export default function Product() {
       >
         선물하기
       </button>
-      { isPresentButtonClicked && (mallStore.amount < mallStore.totalPrice)
+      { isError
         ? <p>❌ 잔액이 부족하여 선물하기가 불가합니다 ❌ </p> : null }
     </div>
   );

@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
+import { MemoryRouter } from 'react-router-dom';
+
 import ProductDetailPage from './ProductDetailPage';
 
 import { mallStore } from '../stores/MallStore';
@@ -8,7 +10,9 @@ test('ProductDetailPage', async () => {
   await mallStore.fetchProduct(1);
 
   render((
-    <ProductDetailPage />
+    <MemoryRouter>
+      <ProductDetailPage />
+    </MemoryRouter>
   ));
 
   screen.getByText(/제조사/);

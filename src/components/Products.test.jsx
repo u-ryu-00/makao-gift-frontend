@@ -1,5 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 
+import { MemoryRouter } from 'react-router-dom';
 import { mallStore } from '../stores/MallStore';
 
 import Products from './Products';
@@ -8,7 +9,9 @@ test('products', async () => {
   mallStore.fetchProducts();
 
   render((
-    <Products />
+    <MemoryRouter>
+      <Products />
+    </MemoryRouter>
   ));
 
   screen.getByText(/상품이 존재하지 않습니다/);
