@@ -5,7 +5,9 @@ Scenario('내용을 미입력하여 선물하기 에러가 발생하는 경우',
   I.amOnPage('/order');
 
   // When
-  // '받는 분 성함'을 입력하지 않고 선물하기를 시도함.
+  I.fillField('receiver', '');
+  I.fillField('address', '성동구');
+  I.fillField('message', '감사합니다');
   I.click('선물하기');
 
   // Then
@@ -17,7 +19,9 @@ Scenario('선물하기에 성공한 경우', ({ I }) => {
   I.amOnPage('/order');
 
   // When
-  // 올바른 성함(필수), 주소(필수), 메시지(선택)를 입력 후 선물하기를 시도함.
+  I.fillField('receiver', '유정');
+  I.fillField('address', '성동구');
+  I.fillField('message', '');
   I.click('선물하기');
 
   // Then

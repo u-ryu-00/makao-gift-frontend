@@ -24,23 +24,21 @@ Scenario('로그인 전 선물하기를 진행할 경우', ({ I }) => {
 });
 
 Scenario('로그인 후 잔액이 모자란 채 선물하기를 진행할 경우', ({ I }) => {
+  I.setupDatabase();
   // Given
-  // 고객 잔액 정보 세팅
-  // 상품 금액 세팅
   // 로그인 함.
-  I.amOnPage('/products/1');
+  I.amOnPage('/products/100');
 
   // When
   I.click('선물하기');
 
   // Then
-  I.see('❌잔액이 부족하여 선물하기가 불가합니다❌');
+  I.see('❌ 잔액이 부족하여 선물하기가 불가합니다 ❌');
 });
 
 Scenario('로그인 후 잔액이 충분할 때 선물하기를 진행할 경우', ({ I }) => {
+  I.setupDatabase();
   // Given
-  // 고객 잔액 정보 세팅
-  // 상품 금액 세팅
   // 로그인 함.
   I.amOnPage('/products/1');
 
