@@ -8,7 +8,9 @@ export default class MallStore {
     this.amount = 0;
 
     this.products = [];
+    this.product = {};
 
+    this.productId = 0;
     this.title = '';
     this.company = '';
     this.price = 0;
@@ -17,14 +19,21 @@ export default class MallStore {
 
     this.quantity = 1;
     this.totalPrice = 0;
+
+    this.orderId = 0;
+
+    this.orders = [];
+    this.order = {};
+
+    this.createdAt = '';
   }
 
   subscribe(listener) {
     this.listeners.add(listener);
   }
 
-  unsubscribe(listner) {
-    this.listeners.delete(listner);
+  unsubscribe(listener) {
+    this.listeners.delete(listener);
   }
 
   publish() {
@@ -61,36 +70,117 @@ export default class MallStore {
 
   async fetchProduct(id) {
     const {
-      title, company, price, description, imageUrl,
+      productId, title, company, price, description, imageUrl,
     } = await apiService.fetchProduct(id);
 
+    this.productId = productId;
     this.title = title;
     this.company = company;
     this.price = price;
     this.description = description;
     this.imageUrl = imageUrl;
-    this.quantity = 1; // 수량 초기화
 
-    this.calculateTotalPrice(); // 총 상품금액 계산
-
-    this.publish();
-  }
-
-  calculateTotalPrice() {
     this.totalPrice = this.price * this.quantity;
+
     this.publish();
   }
 
   plusQuantityAndTotalPrice() {
     this.quantity += 1;
-    this.totalPrice += this.price;
+    this.totalPrice = this.price * this.quantity;
 
     this.publish();
   }
 
   minusQuantityAndTotalPrice() {
     this.quantity -= 1;
-    this.totalPrice -= this.price;
+    this.totalPrice = this.price * this.quantity;
+
+    this.publish();
+  }
+
+  resetQuantity() {
+    this.quantity = 1;
+
+    this.publish();
+  }
+
+  async requestPresent({
+    userId,
+    productId,
+    title,
+    company,
+    description,
+    imageUrl,
+    quantity,
+    receiver,
+    address,
+    message,
+  }) {
+    this.changePresentState('processing');
+
+    try {
+      const { id } = await apiService.createOrder({
+        userId,
+        productId,
+        title,
+        company,
+        description,
+        imageUrl,
+        quantity,
+        receiver,
+        address,
+        message,
+      });
+
+      this.receiver = receiver;
+      this.address = address;
+      this.message = message;
+
+      this.changePresentState('success');
+      this.publish();
+
+      return id;
+    } catch (e) {
+      this.changePresentState('failed');
+      this.publish();
+
+      return '';
+    }
+  }
+
+  changePresentState(state) {
+    this.presentState = state;
+
+    this.publish();
+  }
+
+  async fetchOrders() {
+    this.orders = await apiService.fetchOrders();
+
+    this.publish();
+  }
+
+  async fetchOrder(id) {
+    const {
+      orderId,
+      productId, title, company, description, imageUrl,
+      quantity, totalPrice,
+      receiver, address, message, createdAt,
+    } = await apiService.fetchOrder(id);
+
+    this.orderId = orderId;
+    this.productId = productId;
+    this.title = title;
+    this.company = company;
+    this.description = description;
+    this.imageUrl = imageUrl;
+    this.quantity = quantity;
+    this.totalPrice = totalPrice;
+    this.receiver = receiver;
+    this.address = address;
+    this.message = message;
+    this.createdAt = createdAt;
 
     this.publish();
   }
