@@ -12,4 +12,9 @@ module.exports = () => actor({
     this.amOnPage(`${backdoorBaseUrl}/delete-product`);
     this.waitForText('OK');
   },
+
+  deleteOrder() {
+    this.amOnPage(`${backdoorBaseUrl}/delete-order`);
+    this.waitForText('OK');
+  },
 });
