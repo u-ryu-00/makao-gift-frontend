@@ -5,6 +5,7 @@ export default class MallStore {
     this.listeners = new Set();
 
     this.userId = 0;
+    this.name = '';
     this.amount = 0;
 
     this.products = [];
