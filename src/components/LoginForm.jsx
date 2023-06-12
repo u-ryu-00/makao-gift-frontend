@@ -48,6 +48,9 @@ export default function LoginForm() {
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('password', { required: true })}
         />
+        {mallStore.loginState === 'fail' ? (
+          <p>아이디 혹은 비밀번호가 맞지 않습니다</p>
+        ) : null}
       </div>
       <button type="submit" onClick={() => {}}>
         로그인하기
