@@ -6,20 +6,33 @@ import config from '../config';
 const baseUrl = config.apiBaseUrl;
 
 export default class ApiService {
+  constructor() {
+    this.accessToken = '';
+  }
+
+  setAccessToken(accessToken) {
+    this.accessToken = accessToken;
+  }
+
   async postSession({ userId, password }) {
     const url = `${baseUrl}/session`;
     const { data } = await axios.post(url, { userId, password });
     return {
       accessToken: data.accessToken,
+      name: data.name,
       amount: data.amount,
     };
   }
 
   async fetchAccount() {
     const url = `${baseUrl}/accounts/me`;
-    // TODO: access token을 header로 넘겨줄 것!
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      headers: {
+        authorization: `Bearer ${this.accessToken}`,
+      },
+    });
     return {
+      name: data.name,
       userId: data.userId,
       amount: data.amount,
     };
@@ -48,7 +61,11 @@ export default class ApiService {
 
   async fetchOrders() {
     const url = `${baseUrl}/orders`;
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      headers: {
+        authorization: `Bearer ${this.accessToken}`,
+      },
+    });
 
     const { orders } = data;
     return orders;
@@ -69,6 +86,10 @@ export default class ApiService {
       receiver,
       address,
       message,
+    }, {
+      headers: {
+        authorization: `Bearer ${this.accessToken}`,
+      },
     });
   }
 

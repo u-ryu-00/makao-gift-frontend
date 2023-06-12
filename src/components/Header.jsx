@@ -10,11 +10,13 @@ export default function Header() {
 
   const mallStore = useMallStore();
 
-  useEffect(() => {
-    mallStore.fetchAccount();
-  }, []);
-
   const [accessToken, setAccessToken] = useLocalStorage('accessToken', '');
+
+  useEffect(() => {
+    if (accessToken) {
+      mallStore.fetchAccount();
+    }
+  }, []);
 
   const handleLogout = () => {
     setAccessToken('');

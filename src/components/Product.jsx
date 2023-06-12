@@ -1,11 +1,14 @@
 import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { useLocalStorage } from 'usehooks-ts';
 import useMallStore from '../hooks/useMallStore';
 
 import numberFormat from '../utils/numberFormat';
 
 export default function Product() {
+  const [accessToken] = useLocalStorage('accessToken');
+
   const navigate = useNavigate();
 
   const mallStore = useMallStore();
@@ -21,6 +24,11 @@ export default function Product() {
   };
 
   const presentButtonClick = () => {
+    if (!accessToken) {
+      navigate('/login');
+      return;
+    }
+
     if (mallStore.amount < mallStore.totalPrice) {
       setError(true);
       return;

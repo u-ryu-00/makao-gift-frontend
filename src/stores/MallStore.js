@@ -6,6 +6,7 @@ export default class MallStore {
 
     this.userId = 0;
     this.name = '';
+    this.password = '';
     this.amount = 0;
 
     this.products = [];
@@ -27,6 +28,8 @@ export default class MallStore {
     this.order = {};
 
     this.createdAt = '';
+
+    this.loginState = '';
   }
 
   subscribe(listener) {
@@ -42,22 +45,32 @@ export default class MallStore {
   }
 
   async login({ userId, password }) {
+    this.changeLoginState('processing');
     try {
-      const { accessToken, amount } = await apiService.postSession({
+      const { accessToken, name, amount } = await apiService.postSession({
         userId, password,
       });
 
+      this.name = name;
       this.amount = amount;
+      this.changeLoginState('success');
 
       return accessToken;
     } catch (e) {
+      this.changeLoginState('fail');
       return '';
     }
   }
 
-  async fetchAccount() {
-    const { userId, amount } = await apiService.fetchAccount();
+  changeLoginState(state) {
+    this.loginState = state;
+    this.publish();
+  }
 
+  async fetchAccount() {
+    const { name, userId, amount } = await apiService.fetchAccount();
+
+    this.name = name;
     this.userId = userId;
     this.amount = amount;
 

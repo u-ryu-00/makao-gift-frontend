@@ -2,6 +2,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Reset } from 'styled-reset';
 
+import { useLocalStorage } from 'usehooks-ts';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -13,8 +15,15 @@ import OrdersPage from './pages/OrdersPage';
 import OrderDetailPage from './pages/OrderDetailPage';
 
 import GlobalStyle from './styles/GlobalStyle';
+import { apiService } from './services/ApiService';
 
 export default function App() {
+  const [accessToken] = useLocalStorage('accessToken', '');
+
+  useEffect(() => {
+    apiService.setAccessToken(accessToken);
+  }, [accessToken]);
+
   return (
     <div>
       <Reset />
