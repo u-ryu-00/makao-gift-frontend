@@ -67,6 +67,29 @@ export default class MallStore {
     this.publish();
   }
 
+  async signup({
+    name, userId, password, confirmPassword,
+  }) {
+    this.changeSignupState('processing');
+    try {
+      const { accessToken, amount } = await apiService.postAccounts({
+        name, userId, password, confirmPassword,
+      });
+      this.amount = amount;
+      this.changeSignupState('success');
+
+      return accessToken;
+    } catch (e) {
+      this.changeSignupState('fail');
+      return '';
+    }
+  }
+
+  changeSignupState(state) {
+    this.signupState = state;
+    this.publish();
+  }
+
   async fetchAccount() {
     const { name, userId, amount } = await apiService.fetchAccount();
 
@@ -134,7 +157,7 @@ export default class MallStore {
     this.changePresentState('processing');
 
     try {
-      const { id } = await apiService.createOrder({
+      await apiService.createOrder({
         userId,
         productId,
         title,
@@ -146,20 +169,9 @@ export default class MallStore {
         address,
         message,
       });
-
-      this.receiver = receiver;
-      this.address = address;
-      this.message = message;
-
       this.changePresentState('success');
-      this.publish();
-
-      return id;
     } catch (e) {
-      this.changePresentState('failed');
-      this.publish();
-
-      return '';
+      this.changePresentState('fail');
     }
   }
 
