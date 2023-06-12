@@ -24,6 +24,19 @@ export default class ApiService {
     };
   }
 
+  async postAccounts({
+    name, userId, password, confirmPassword,
+  }) {
+    const url = `${baseUrl}/accounts`;
+    const { data } = await axios.post(url, {
+      name, userId, password, confirmPassword,
+    });
+    return {
+      accessToken: data.accessToken,
+      amount: data.amount,
+    };
+  }
+
   async fetchAccount() {
     const url = `${baseUrl}/accounts/me`;
     const { data } = await axios.get(url, {

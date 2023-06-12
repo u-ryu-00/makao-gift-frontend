@@ -55,7 +55,7 @@ export default function LoginForm() {
       <button type="submit" onClick={() => {}}>
         로그인하기
       </button>
-      <Link to="/register">회원가입</Link>
+      <Link to="/signup">회원가입</Link>
     </form>
   );
 }
