@@ -76,16 +76,18 @@ export default class ApiService {
     };
   }
 
-  async fetchOrders() {
+  async fetchOrders(pageNumber) {
     const url = `${baseUrl}/orders`;
     const { data } = await axios.get(url, {
       headers: {
         authorization: `Bearer ${this.accessToken}`,
       },
+      params: {
+        page: pageNumber,
+      },
     });
 
-    const { orders } = data;
-    return orders;
+    return data;
   }
 
   async createOrder({

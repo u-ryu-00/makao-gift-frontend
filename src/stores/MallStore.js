@@ -191,8 +191,10 @@ export default class MallStore {
     this.publish();
   }
 
-  async fetchOrders() {
-    this.orders = await apiService.fetchOrders();
+  async fetchOrders(pageNumber) {
+    const data = await apiService.fetchOrders(pageNumber);
+    this.orders = data.orders;
+    this.totalPages = data.totalPages;
 
     this.publish();
   }
