@@ -10,6 +10,7 @@ export default class MallStore {
     this.amount = 0;
 
     this.products = [];
+    this.totalPages = 0;
     this.product = {};
 
     this.productId = 0;
@@ -106,8 +107,11 @@ export default class MallStore {
     this.publish();
   }
 
-  async fetchProducts() {
-    this.products = await apiService.fetchProducts();
+  async fetchProducts(pageNumber) {
+    const data = await apiService.fetchProducts(pageNumber);
+    this.products = data.products;
+    this.totalPages = data.totalPages;
+
     this.publish();
   }
 
