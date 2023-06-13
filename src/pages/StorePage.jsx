@@ -1,15 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import Products from '../components/Products';
 
 import useMallStore from '../hooks/useMallStore';
+import Pagination from '../components/Pagination';
 
 export default function StorePage() {
   const mallStore = useMallStore();
 
+  const navigate = useNavigate();
+
+  const [page, setPage] = useState('');
+
   useEffect(() => {
-    mallStore.fetchProducts();
-  }, []);
+    mallStore.fetchProducts(page);
+  }, [page]);
+
+  const { totalPages } = mallStore;
+
+  const moveToPage = (clickedPage) => {
+    navigate(`?page=${clickedPage}`);
+  };
 
   return (
     <div>
@@ -22,6 +34,11 @@ export default function StorePage() {
       <p>마카오톡 선물하기에서만 볼 수 있는 특별템 기획전</p>
       <p>인기선물을 한 자리에 모았어요</p>
       <Products />
+      <Pagination
+        totalPages={totalPages}
+        onClick={moveToPage}
+        setPage={setPage}
+      />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { mallStore } from '../stores/MallStore';
 import StorePage from './StorePage';
 
 test('storePage', async () => {
-  mallStore.fetchProducts();
+  mallStore.fetchProducts(1);
 
   render((
     <MemoryRouter>

@@ -27,6 +27,5 @@ export default function Products() {
         </Link>
       ))}
     </div>
-
   );
 }
