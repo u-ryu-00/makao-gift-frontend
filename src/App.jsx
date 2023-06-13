@@ -16,6 +16,7 @@ import OrderDetailPage from './pages/OrderDetailPage';
 
 import GlobalStyle from './styles/GlobalStyle';
 import { apiService } from './services/ApiService';
+import SignupCompletePage from './pages/SignupCompletePage';
 
 export default function App() {
   const [accessToken] = useLocalStorage('accessToken', '');
@@ -33,6 +34,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/signupComplete" element={<SignupCompletePage />} />
         <Route path="/products" element={<StorePage />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
         <Route path="/order" element={<OrderPage />} />

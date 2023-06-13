@@ -1,5 +1,9 @@
 Feature('로그인 - 고객은 자신임을 증명하기 위해 로그인을 할 수 있다. ');
 
+Before(({ I }) => {
+  I.setupDatabase();
+});
+
 Scenario('로그인을 하러 로그인 화면에 접속한 경우', ({ I }) => {
   // When
   I.amOnPage('/login');
@@ -10,7 +14,9 @@ Scenario('로그인을 하러 로그인 화면에 접속한 경우', ({ I }) => 
 
 Scenario('잘못된 아이디와 비밀번호를 입력한 경우', ({ I }) => {
   // Given
-  I.amOnPage('/login');
+  I.amOnPage('/');
+
+  I.click('로그인');
 
   // When
   // 잘못된 아이디나 비밀번호로 로그인을 시도함.
@@ -38,7 +44,10 @@ Scenario('로그인에 성공한 경우', ({ I }) => {
 
   // When
   // 올바른 아이디, 비밀번호를 모두 입력 후 로그인을 시도함.
-  I.click('로그인');
+  I.fillField('로그인', 'a111');
+  I.fillField('비밀번호', 'Aa1!!!!!');
+
+  I.click('로그인하기');
 
   // Then
   I.amOnPage('/');

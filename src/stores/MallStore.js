@@ -30,6 +30,9 @@ export default class MallStore {
     this.createdAt = '';
 
     this.loginState = '';
+    this.signupState = '';
+
+    this.errorMessage = '';
   }
 
   subscribe(listener) {
@@ -80,13 +83,16 @@ export default class MallStore {
 
       return accessToken;
     } catch (e) {
-      this.changeSignupState('fail');
+      const { message } = e.response.data;
+      this.changeSignupState('fail', { errorMessage: message });
       return '';
     }
   }
 
-  changeSignupState(state) {
+  changeSignupState(state, { errorMessage = '' } = {}) {
+    this.errorMessage = errorMessage;
     this.signupState = state;
+
     this.publish();
   }
 
@@ -209,6 +215,14 @@ export default class MallStore {
     this.createdAt = createdAt;
 
     this.publish();
+  }
+
+  get isSignupFail() {
+    return this.signupState === 'fail';
+  }
+
+  get isPresentFail() {
+    return this.presentState === 'fail';
   }
 }
 export const mallStore = new MallStore();

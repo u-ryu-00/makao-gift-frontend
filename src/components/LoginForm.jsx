@@ -11,7 +11,7 @@ export default function LoginForm() {
 
   const mallStore = useMallStore();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const [, setAccessToken] = useLocalStorage('accessToken', '');
 
@@ -37,6 +37,9 @@ export default function LoginForm() {
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('userId', { required: true })}
         />
+        {errors.userId ? (
+          <p>아이디를 입력해주세요</p>
+        ) : null}
       </div>
       <div>
         <label htmlFor="input-password" style={{ display: 'none' }}>
@@ -48,6 +51,9 @@ export default function LoginForm() {
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...register('password', { required: true })}
         />
+        {errors.userId ? (
+          <p>비밀번호를 입력해주세요</p>
+        ) : null}
         {mallStore.loginState === 'fail' ? (
           <p>아이디 혹은 비밀번호가 맞지 않습니다</p>
         ) : null}
