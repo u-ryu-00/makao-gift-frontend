@@ -11,7 +11,7 @@ export default function Orders() {
     <div>
       {(orders && orders.length !== 0) ? (
         <div>
-          <p>내가 주문한 내역입니다!!!!!!!</p>
+          <p>내가 주문한 내역입니다</p>
           <hr />
           {orders.map((order) => (
             <Link to={`/orders/${order.orderId}`} key={order.orderId}>
