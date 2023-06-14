@@ -9,23 +9,22 @@ function Pagination({ totalPages, onClick, setPage }) {
     setPage(pageNumber);
 
     onClick(pageNumber);
-    // Perform any additional logic or data fetching based on the new page
   };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      handlePageChange(currentPage + 1);
-    }
-  };
+  // const handleNextPage = () => {
+  //   if (currentPage < totalPages) {
+  //     handlePageChange(currentPage + 1);
+  //   }
+  // };
 
-  const handleLastPage = () => {
-    handlePageChange(totalPages);
-  };
+  // const handleLastPage = () => {
+  //   handlePageChange(totalPages);
+  // };
 
   return (
     <div>
-      <button type="button" onClick={() => handlePageChange(1)}>First</button>
-      <button
+      {/* <button type="button" onClick={() => handlePageChange(1)}>First</button> */}
+      {/* <button
         type="button"
         onClick={() => {
           if (currentPage > 1) {
@@ -34,7 +33,7 @@ function Pagination({ totalPages, onClick, setPage }) {
         }}
       >
         Previous
-      </button>
+      </button> */}
       {Array.from({ length: totalPages }, (_, index) => (
         <button
           type="button"
@@ -45,10 +44,10 @@ function Pagination({ totalPages, onClick, setPage }) {
           {index + 1}
         </button>
       ))}
-      <button type="button" onClick={handleNextPage}>
+      {/* <button type="button" onClick={handleNextPage}>
         Next
       </button>
-      <button type="button" onClick={handleLastPage}>Last</button>
+      <button type="button" onClick={handleLastPage}>Last</button> */}
     </div>
   );
 }
