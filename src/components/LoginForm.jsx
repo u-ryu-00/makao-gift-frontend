@@ -1,6 +1,6 @@
 import { useLocalStorage } from 'usehooks-ts';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { useForm } from 'react-hook-form';
 
@@ -21,6 +21,8 @@ const Container = styled.div`
 export default function LoginForm() {
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const mallStore = useMallStore();
 
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -30,9 +32,12 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     const { userId, password } = data;
     const accessToken = await mallStore.login({ userId, password });
+
     if (accessToken) {
       setAccessToken(accessToken);
-      navigate('/');
+
+      const redirect = new URLSearchParams(location.search).get('redirect');
+      navigate(redirect || '/');
     }
   };
 

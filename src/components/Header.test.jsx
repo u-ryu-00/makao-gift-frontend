@@ -12,16 +12,11 @@ const context = describe;
 const navigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
-  Link({ children, to }) {
-    return (
-      <a href={to}>
-        {children}
-      </a>
-    );
-  },
-  useNavigate() {
-    return navigate;
-  },
+  ...jest.requireActual('react-router-dom'), // Keep the original functionality
+  NavLink: jest.fn().mockImplementation(({ children, to }) => (
+    <a href={to}>{children}</a>
+  )),
+  useNavigate: () => navigate,
 }));
 
 describe('Header', () => {
