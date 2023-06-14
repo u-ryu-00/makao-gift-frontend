@@ -1,40 +1,49 @@
 import {
   fireEvent, render, screen, waitFor,
 } from '@testing-library/react';
-
 import LoginForm from './LoginForm';
 
 const navigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
-  Link({ children, to }) {
-    return (
-      <a href={to}>
-        {children}
-      </a>
-    );
-  },
-  useNavigate() {
-    return navigate;
-  },
+  Link: ({ children, to }) => (
+    <a href={to}>
+      {children}
+    </a>
+  ),
+  useNavigate: () => navigate,
+  useLocation: () => ({
+    search: '',
+  }),
 }));
 
-test('LoginForm', async () => {
-  render((
-    <LoginForm />
-  ));
+jest.mock('usehooks-ts', () => ({
+  useLocalStorage: () => ['', jest.fn()],
+}));
 
-  screen.getByRole('heading', { name: 'USER LOGIN' });
+jest.mock('../hooks/useMallStore', () => jest.fn(() => ({
+  login: async () => 'mockAccessToken',
+  loginState: '',
+})));
 
-  fireEvent.change(screen.getByLabelText('아이디'), {
-    target: { value: 'a111' },
-  });
-  fireEvent.change(screen.getByLabelText('비밀번호'), {
-    target: { value: 'Aa1!!!!!' },
-  });
-  fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+describe('LoginForm', () => {
+  test('should navigate to homepage on successful login', async () => {
+    render(<LoginForm />);
 
-  await waitFor(() => {
-    expect(navigate).toBeCalledWith('/');
+    expect(screen.getByRole('heading', { name: 'USER LOGIN' })).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText('아이디'), {
+      target: { value: 'a111' },
+    });
+
+    fireEvent.change(screen.getByLabelText('비밀번호'), {
+      target: { value: 'Aa1!!!!!' },
+    });
+
+    fireEvent.click(screen.getByRole('button', { name: '로그인하기' }));
+
+    await waitFor(() => {
+      expect(navigate).toBeCalledWith('/');
+    });
   });
 });

@@ -36,6 +36,7 @@ const H3 = styled.h3`
   font-size: 1.6rem;
 `;
 
+
 export default function StorePage() {
   const mallStore = useMallStore();
 
@@ -66,7 +67,6 @@ export default function StorePage() {
           <H3>마카오톡 선물하기에서만 볼 수 있는 특별템 기획전</H3>
         </Text>
       </Banner>
-      <H3>인기선물을 한 자리에 모았어요</H3>
       <Products />
       <Pagination
         totalPages={totalPages}

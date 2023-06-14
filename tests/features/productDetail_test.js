@@ -42,6 +42,10 @@ Scenario('로그인 전 선물하기를 진행할 경우', ({ I }) => {
   // Then
   I.amOnPage('/login');
   I.see('USER LOGIN');
+
+  I.login();
+
+  I.amOnPage('/products/1');
 });
 
 Scenario('로그인 후 잔액이 모자란 채 선물하기를 진행할 경우', ({ I }) => {
