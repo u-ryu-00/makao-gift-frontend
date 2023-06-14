@@ -14,6 +14,17 @@ Scenario('상품이 있는 경우', ({ I }) => {
   I.see('캔디 글레이즈 컬러밤');
 });
 
+Scenario('두번째 페이지를 클릭하는 경우', ({ I }) => {
+  // When
+  I.amOnPage('/products');
+
+  I.click('2');
+
+  // Then
+  I.see('인기선물을 한 자리에 모았어요');
+  I.see('헤라 블랙쿠션 27호');
+});
+
 Scenario('상품이 없는 경우', ({ I }) => {
   // Given
   I.deleteProduct();

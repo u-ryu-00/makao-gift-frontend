@@ -18,10 +18,10 @@ module.exports = () => actor({
     this.waitForText('OK');
   },
 
-  login(userId) {
+  login() {
     this.amOnPage('/login');
 
-    this.fillField('아이디', userId);
+    this.fillField('아이디', 'a111');
     this.fillField('비밀번호', 'Aa1!!!!!');
 
     this.click('[type=submit]');
@@ -29,5 +29,10 @@ module.exports = () => actor({
     this.wait(2);
 
     this.waitForText('로그아웃');
+  },
+
+  addOrder() {
+    this.amOnPage(`${backdoorBaseUrl}/add-order`);
+    this.waitForText('OK');
   },
 });
