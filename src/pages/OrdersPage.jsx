@@ -35,11 +35,7 @@ export default function OrdersPage() {
   return (
     <div>
       <Orders />
-      <Pagination
-        totalPages={totalPages}
-        onClick={moveToPage}
-        setPage={setPage}
-      />
+      <Pagination totalPages={totalPages} onClick={moveToPage} setPage={setPage} />
     </div>
   );
 }
