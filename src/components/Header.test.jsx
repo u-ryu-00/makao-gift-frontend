@@ -6,8 +6,6 @@ import { MemoryRouter } from 'react-router-dom';
 
 import Header from './Header';
 
-import theme from '../styles/theme';
-
 const context = describe;
 
 const navigate = jest.fn();
@@ -23,11 +21,9 @@ jest.mock('react-router-dom', () => ({
 describe('Header', () => {
   function renderHeader() {
     render((
-      <ThemeProvider theme={theme}>
-        <MemoryRouter>
-          <Header />
-        </MemoryRouter>
-      </ThemeProvider>
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
     ));
   }
 

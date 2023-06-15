@@ -32,7 +32,7 @@ export default function App() {
   }, [accessToken]);
 
   return (
-    <ThemeProvider>
+    <>
       <Reset />
       <GlobalStyle />
       <Header />
@@ -47,6 +47,6 @@ export default function App() {
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/orders/:id" element={<OrderDetailPage />} />
       </Routes>
-    </ThemeProvider>
+    </>
   );
 }
