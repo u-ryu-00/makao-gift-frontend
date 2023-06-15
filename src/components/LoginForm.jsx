@@ -69,6 +69,7 @@ export default function LoginForm() {
           <input
             id="input-password"
             placeholder="비밀번호"
+            type="password"
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('password', { required: true })}
           />

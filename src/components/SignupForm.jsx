@@ -109,7 +109,7 @@ export default function SignupForm() {
           <br />
           <input
             id="input-account-password"
-            // type="password"
+            type="password"
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('password', { required: true })}
           />
@@ -129,7 +129,7 @@ export default function SignupForm() {
           <br />
           <input
             id="input-account-confirmPassword"
-            // type="password"
+            type="password"
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...register('confirmPassword', { required: true })}
           />
