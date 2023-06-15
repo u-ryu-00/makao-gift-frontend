@@ -36,7 +36,6 @@ const H3 = styled.h3`
   font-size: 1.6rem;
 `;
 
-
 export default function StorePage() {
   const mallStore = useMallStore();
 
