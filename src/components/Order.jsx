@@ -10,8 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 5rem;
-  height: 120vh;
+  margin-top: 3rem;
 
   h1 {
     color: #999999;
@@ -61,7 +60,7 @@ export default function Order() {
 
   return (
     <Container>
-      <img src={mallStore.imageUrl} alt={mallStore.title} style={{ width: '40rem', height: '40rem' }} />
+      <img src={mallStore.imageUrl} alt={mallStore.title} style={{ width: '25rem', height: '25rem' }} />
       <h1>{mallStore.company}</h1>
       <h2>{mallStore.title}</h2>
       <Divider />
