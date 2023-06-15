@@ -10,7 +10,7 @@ import Button from './ui/Button';
 import ErrorText from './ui/ErrorText';
 
 const Container = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;

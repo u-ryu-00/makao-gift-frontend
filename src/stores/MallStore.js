@@ -4,7 +4,7 @@ export default class MallStore {
   constructor() {
     this.listeners = new Set();
 
-    this.userId = 0;
+    this.userId = '';
     this.name = '';
     this.password = '';
     this.amount = 0;
