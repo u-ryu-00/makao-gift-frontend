@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+
 import useMallStore from '../hooks/useMallStore';
 
 import numberFormat from '../utils/numberFormat';

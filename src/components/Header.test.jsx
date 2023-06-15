@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 
 import { MemoryRouter } from 'react-router-dom';
+
 import Header from './Header';
 
 import theme from '../styles/theme';

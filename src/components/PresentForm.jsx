@@ -1,8 +1,13 @@
 import { useForm } from 'react-hook-form';
+
 import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
 import useMallStore from '../hooks/useMallStore';
+
 import numberFormat from '../utils/numberFormat';
+
 import Button from './ui/Button';
 import ErrorText from './ui/ErrorText';
 import GuideText from './ui/GuideText';
@@ -15,7 +20,6 @@ const Information = styled.div`
 
 const Container = styled.div`
   border: 1px solid #D9D9D9;
-
   padding: 6rem;
   margin: 4rem;
 

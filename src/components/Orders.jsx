@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
+
 import useMallStore from '../hooks/useMallStore';
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-
   display: grid;
-
   grid-template-columns: 30rem 30rem 30rem 30rem;
   column-gap: 0;
   padding: 1rem;

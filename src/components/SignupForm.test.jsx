@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
+
 import { MemoryRouter } from 'react-router-dom';
+
 import SignupForm from './SignupForm';
 
 test('signupForm', async () => {

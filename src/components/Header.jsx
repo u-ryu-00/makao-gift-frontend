@@ -1,9 +1,13 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import { useEffect } from 'react';
+
 import { useLocalStorage } from 'usehooks-ts';
+
 import styled from 'styled-components';
+
 import Account from './Account';
+
 import useMallStore from '../hooks/useMallStore';
 
 const Menu = styled.ul`
