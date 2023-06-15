@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { useLocalStorage } from 'usehooks-ts';
+
 import { useNavigate } from 'react-router-dom';
+
 import useMallStore from '../hooks/useMallStore';
 
 import Orders from '../components/Orders';
+
 import Pagination from '../components/Pagination';
 
 export default function OrdersPage() {

@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react';
 
 import { MemoryRouter } from 'react-router-dom';
+
 import { mallStore } from '../stores/MallStore';
+
 import OrderPage from './OrderPage';
 
 test('orderPage', async () => {

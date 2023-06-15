@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
+
 import Products from '../components/Products';
 
 import useMallStore from '../hooks/useMallStore';
+
 import Pagination from '../components/Pagination';
 
 const Banner = styled.div`
