@@ -2,9 +2,9 @@
   "name": "makao-gift-frontend",
   "version": "1.0.0",
   "description": "Makaogift Front-end application",
-  "main": "index.js",
   "scripts": {
     "start": "parcel index.html --port 8080",
+    "build": "parcel build index.html",
     "test": "jest",
     "watch:test": "npm test -- --watchAll",
     "codeceptjs": "codeceptjs run --steps",
